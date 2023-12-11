@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
-import { PrismaService } from 'src/database/prisma.service';
 import { FeriadoService } from './feriados.service';
 import { FeriadosController } from './feriados.controller';
+import { DatabaseModule } from 'src/database/database.modeule';
 
 @Module({
+  imports: [DatabaseModule],
   controllers: [FeriadosController],
-  providers: [FeriadoService, PrismaService],
+  providers: [FeriadoService],
 })
 export class FeriadosModule {}

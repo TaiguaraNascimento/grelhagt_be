@@ -2,7 +2,6 @@ import { Controller, Get, Body, Post } from '@nestjs/common';
 import { FeriadoService } from './feriados.service';
 import { Prisma } from '@prisma/client';
 
-
 @Controller('feriados')
 export class FeriadosController {
   constructor(private feriadosService: FeriadoService) {}

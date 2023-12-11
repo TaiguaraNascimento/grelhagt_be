@@ -13,8 +13,8 @@ datasource db {
 model TipoDeFeriado {
   id                     String      @id @map("_id") @default(auto()) @db.ObjectId
   tipoDoFeriado           String
-  // feriados Feriados[]
-  // status  Boolean @default(true)
+  feriados Feriados[]
+  status  Boolean @default(true)
 }
 
 model Filiais {
@@ -30,8 +30,8 @@ model Feriados {
   id              String      @id @map("_id") @default(auto()) @db.ObjectId
   nomeDoFeriado   String
   data            DateTime
-  // tipoDeFeriado   TipoDeFeriado @relation(fields: [tipoDeFeriadoId], references: [id])
-  // tipoDeFeriadoId String @db.ObjectId
+  tipoDeFeriado   TipoDeFeriado @relation(fields: [tipoDeFeriadoId], references: [id])
+  tipoDeFeriadoId String @db.ObjectId
   filial          Filiais      @relation(fields: [filialId], references: [id])
   filialId        String @db.ObjectId
   createdAt       DateTime @default(now())
