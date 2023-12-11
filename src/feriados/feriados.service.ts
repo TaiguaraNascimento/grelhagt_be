@@ -7,26 +7,26 @@ export class FeriadoService {
   constructor(private prisma: PrismaService) {}
 
   async criarTipoDeFeriado(data: Prisma.TipoDeFeriadoCreateInput) {
-    const novoTipoDeFeriado = this.prisma.tipoDeFeriado.create({
-      data: data,
-    });
 
-    /*
+
+
     const tipoDeFeriadoExiste = await this.prisma.tipoDeFeriado.findFirst({
       where: {
-        tipoDoFeriado: tipoDeFeriado.tipoDeFeriado,
+        tipoDoFeriado: data.tipoDoFeriado,
       },
     });
 
-    
     if (tipoDeFeriadoExiste) {
       throw new Error('Tipo de Feriado já está cadastrado');
-    }
+      } else {
 
-    */
-
-    console.log(novoTipoDeFeriado);
-
-    return novoTipoDeFeriado;
+      // Realiza o cadastro
+      const novoTipoDeFeriado = this.prisma.tipoDeFeriado.create({
+        data: data,
+      });
+      
+      return novoTipoDeFeriado;
+     }
+  
   }
 }

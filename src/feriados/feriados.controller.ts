@@ -1,5 +1,7 @@
 import { Controller, Get, Body, Post } from '@nestjs/common';
 import { FeriadoService } from './feriados.service';
+import { Prisma } from '@prisma/client';
+
 
 @Controller('feriados')
 export class FeriadosController {
@@ -11,7 +13,7 @@ export class FeriadosController {
   }
 
   @Post('tiposdeferiados')
-  async criarTipoDeFeriado(@Body() data: TipoDoFeriadoDto) {
+  async criarTipoDeFeriado(@Body() data: Prisma.TipoDeFeriadoCreateInput) {
     return this.feriadosService.criarTipoDeFeriado(data);
   }
 }
