@@ -1,0 +1,41 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+
+
+model TipoDeFeriado {
+  id                     String      @id @map("_id") @default(auto()) @db.ObjectId
+  tipoDoFeriado           String
+  // feriados Feriados[]
+  // status  Boolean @default(true)
+}
+
+model Filiais {
+  id            String      @id @map("_id") @default(auto()) @db.ObjectId
+  nomeDaFilial  String @unique
+
+  feriados Feriados[]
+  status  Boolean @default(true)
+}
+
+
+model Feriados {
+  id              String      @id @map("_id") @default(auto()) @db.ObjectId
+  nomeDoFeriado   String
+  data            DateTime
+  // tipoDeFeriado   TipoDeFeriado @relation(fields: [tipoDeFeriadoId], references: [id])
+  // tipoDeFeriadoId String @db.ObjectId
+  filial          Filiais      @relation(fields: [filialId], references: [id])
+  filialId        String @db.ObjectId
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+// npx prisma db push                                                                  
