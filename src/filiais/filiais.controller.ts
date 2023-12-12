@@ -11,7 +11,7 @@ export class FiliaisController {
     return this.filiaisService.listarFiliais();
   }
 
-  @Post()
+  @Post('nova')
   async criarNovaFilial(@Body() data: Prisma.FiliaisCreateInput) {
     return this.filiaisService.criarFilial(data);
   }

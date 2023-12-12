@@ -3,16 +3,19 @@
 <h2>API Filiais</h2>
 <pre>http://localhost:3000/filiais</pre> 
 <p><b>GET: </b>O endereço retorna a lista de todas as filiais da empresa.</p> 
+<pre>http://localhost:3000/filiais/nova</pre> 
 <p><b>POST: </b>A requisição POST cadastra uma nova filial usando como campos do BODY/JSON "nomeDaFilial", "status" e "uf".</p>
 
 <h2>API Tipos de Feriados</h2>
 <pre>http://localhost:3000/feriados/tiposdeferiados</pre>
 <p>GET: O endereço retorna todos os tipos de feriados cadastrados.</p>
+<pre>http://localhost:3000/feriados/tiposdeferiados/novo</pre>
 <p>POST: Essa requisição com os campos do BODY/JSON "tipoDoFeriado" e "status" cadastram um novo tipo.</p>
 
 <hr/>
+
+<h1>Sandbox - Roadmap</h1>
 <pre>
-Sandbox
 
 - Separar todos os endpoints cada um com um modulo separado
 - Terminar o crud de cada um - deletar, alterar
