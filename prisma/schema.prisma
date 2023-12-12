@@ -8,7 +8,103 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// CRUDS básicos
 
+model Usuarios {
+  id                      String      @id @map("_id") @default(auto()) @db.ObjectId
+  usuario                 String
+  email                   String
+  solicitante             Programacao[] @relation("solicitante")
+  aprovador               Programacao[] @relation("aprovador")
+}
+
+
+model Filiais {
+  id                      String      @id @map("_id") @default(auto()) @db.ObjectId
+  nomeDaFilial            String @unique
+  uf                      String?
+  status                  Boolean @default(true)
+  feriados                Feriados[]
+  staff                   Staff[]
+}
+
+model Industrias {
+  id                  String @id @map("_id") @default(auto()) @db.ObjectId
+  industrias          String
+  clientes            Clientes[]
+}
+
+model Divisoes {
+  id                        String @id @map("_id") @default(auto()) @db.ObjectId
+  divisoes                  String
+  staff                     Staff[]
+}
+
+
+
+
+
+
+
+// CRUD Propostas e Clientes
+
+model Clientes {
+  id                  String @id @map("_id") @default(auto()) @db.ObjectId
+  nomeDoCliente       String
+  codigoClinte        String
+  razao_social        String
+  cnpj                String
+  grupo               String @db.ObjectId
+  status              Boolean @default(true)
+  industria           Industrias @relation(fields: [industria_id], references: [id])
+  industria_id        String @db.ObjectId
+  fy_entrada          FiscalYears @relation(fields: [fy_entrada_id], references: [id])
+  fy_entrada_id       String @db.ObjectId
+  propostas           Propostas[]
+}
+
+model OrigensDeProjetos {
+  id                  String @id @map("_id") @default(auto()) @db.ObjectId
+  origemDeProjetos    String
+  propostas           Propostas[]
+}
+
+
+model Propostas {
+  id                          String                    @id @map("_id") @default(auto()) @db.ObjectId
+  gtbProjeto                  String              
+  projetoInterno              Boolean                   @default(false)
+  
+  cliente                     Clientes                  @relation(fields: [clienteId], references: [id])
+  clienteId                   String                    @db.ObjectId
+  
+  responsavel                 Profissionais             @relation(fields: [responsavelId], references: [id])
+  responsavelId               String                    @db.ObjectId
+  
+  totalDeHoras                Int              
+  taxaMedia                   Float
+  valorTotal                  String              
+  
+  classificacao               ClassificacaoDeProjetos   @relation(fields: [classificacaoId], references: [id])
+  classificacaoId             String                    @db.ObjectId
+  
+  origemDeProjetos            OrigensDeProjetos         @relation(fields: [origemDeProjetosId], references: [id])
+  origemDeProjetosId          String                    @db.ObjectId
+  
+  trabalhoNovo                String
+  referencia                  String
+  comentarios                 String
+
+  programacao                 Programacao[]
+}
+
+
+
+
+
+
+
+// CRUD de Programação
 
 model TipoDeFeriado {
   id                     String      @id @map("_id") @default(auto()) @db.ObjectId
@@ -17,25 +113,139 @@ model TipoDeFeriado {
   status  Boolean @default(true)
 }
 
-model Filiais {
-  id            String      @id @map("_id") @default(auto()) @db.ObjectId
-  nomeDaFilial  String @unique
-
-  feriados Feriados[]
-  status  Boolean @default(true)
+model FiscalYears {
+  id                  String @id @map("_id") @default(auto()) @db.ObjectId
+  fiscalyear          String
+  data_inicial        DateTime
+  data_final          DateTime
+  
+  clientes            Clientes[]
 }
-
 
 model Feriados {
   id              String      @id @map("_id") @default(auto()) @db.ObjectId
   nomeDoFeriado   String
-  data            DateTime
+  dataDoFeriado   DateTime
+  
   tipoDeFeriado   TipoDeFeriado @relation(fields: [tipoDeFeriadoId], references: [id])
   tipoDeFeriadoId String @db.ObjectId
+  
   filial          Filiais      @relation(fields: [filialId], references: [id])
   filialId        String @db.ObjectId
+  
+  comentarios     String
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 }
 
+
+model TipoDeEventosPadrao {
+  id                            String          @id @map("_id") @default(auto()) @db.ObjectId
+  tipoDeEvento                  String
+  gtb_padrao                    String
+}
+
+model Programacao {
+  id                            String          @id @map("_id") @default(auto()) @db.ObjectId
+  dataDaAlocacao                DateTime
+
+  proposta                      Propostas       @relation(fields: [propostaId], references: [id])
+  propostaId                    String          @db.ObjectId
+  
+  profissional                  Staff           @relation(fields: [profissionalId], references: [id])
+  profissionalId                String          @db.ObjectId
+  
+  dataSolicitacao               DateTime        @default(now())
+
+  solicitante                   Usuarios        @relation(name: "solicitante", fields: [solicitanteId], references: [id])
+  solicitanteId                 String          @db.ObjectId
+
+  dataDaAprovacao               DateTime
+
+  aprovador                     Usuarios        @relation(name: "aprovador", fields: [aprovadorId], references: [id])
+  aprovadorId                   String          @db.ObjectId
+
+  status                        Boolean @default(false)
+
+  comentarios                   String
+
+}
+
+
+
+
+
+// CRUD de Profissionais
+
+model Cargos {
+  id                String      @id @map("_id") @default(auto()) @db.ObjectId
+  cargo             String
+  cargo_executivo   Boolean @default(false)
+  staff             Staff[]
+}
+
+model Profissionais {
+  id                        String      @id @map("_id") @default(auto()) @db.ObjectId
+  nomeDoProfissional        String
+  dataDeNascimento          DateTime
+  email                     String
+  dataDeEntrada             DateTime
+  dataDeDesligamento        DateTime
+  comentarios               String
+  propostas                 Propostas[]
+  staff                     Staff[]
+}
+
+model Staff {
+  id                        String              @id @map("_id") @default(auto()) @db.ObjectId
+  dataDaPromocao            DateTime
+  
+  profissional              Profissionais       @relation(fields: [profissionaisId], references: [id])
+  profissionaisId           String              @db.ObjectId
+  
+  cargo                     Cargos              @relation(fields: [cargoId], references: [id])
+  cargoId                   String              @db.ObjectId
+  
+  divisao                   Divisoes            @relation(fields: [divisaoId], references: [id])
+  divisaoId                 String              @db.ObjectId
+  
+  filial                    Filiais             @relation(fields: [filialId], references: [id])
+  filialId                  String              @db.ObjectId
+  
+  status                    Boolean
+  comentarios               String
+  
+  programacao               Programacao[]
+}
+
+
+
+
+
+// CRUD DE PROJETOS
+
+model ClassePrimariaProjetos {
+  id                String      @id @map("_id") @default(auto()) @db.ObjectId
+  classePrimaria    String
+  classeSecundaria  ClasseSecundariaProjetos[]
+}
+
+model ClasseSecundariaProjetos {
+  id                  String      @id @map("_id") @default(auto()) @db.ObjectId
+  classeSecundaria    String
+  classePrimaria      ClassePrimariaProjetos @relation(fields: [classePrimariaId], references: [id])
+  classePrimariaId    String @db.ObjectId
+  classificacaoDeProjetos ClassificacaoDeProjetos[]
+
+}
+
+model ClassificacaoDeProjetos {
+  id                  String      @id @map("_id") @default(auto()) @db.ObjectId
+  classeSecundaria    ClasseSecundariaProjetos @relation(fields: [classeSecundariaId], references: [id])
+  classeSecundariaId  String @db.ObjectId
+  propostas           Propostas[]
+}
+
+
 // npx prisma db push                                                                  
+// Teste

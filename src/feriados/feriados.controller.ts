@@ -7,12 +7,28 @@ export class FeriadosController {
   constructor(private feriadosService: FeriadoService) {}
 
   @Get()
-  findAll(): string {
-    return 'This action returns all cats';
+  listarFeriadosCadastrados() {
+    return this.feriadosService.listarFeriadosCadastrados();
   }
 
-  @Post('tiposdeferiados')
+  @Get('frequencia')
+  relatorioDeFrequencia() {
+    return this.feriadosService.consolidacaoDosFeriados();
+  }
+
+  @Post()
+  cadastrarFeriado(@Body() data: Prisma.FeriadosCreateInput) {
+    data.dataDoFeriado = new Date(data.dataDoFeriado).toISOString();
+    return this.feriadosService.cadastrarFeriado(data);
+  }
+
+  @Post('novotipodeferiado')
   async criarTipoDeFeriado(@Body() data: Prisma.TipoDeFeriadoCreateInput) {
     return this.feriadosService.criarTipoDeFeriado(data);
+  }
+
+  @Get('tiposdeferiados')
+  async listarTiposDeFeriados() {
+    return this.feriadosService.listarTiposDeFeriadosCadastrados();
   }
 }
