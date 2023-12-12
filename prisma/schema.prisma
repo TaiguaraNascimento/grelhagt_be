@@ -21,8 +21,8 @@ model Usuarios {
 
 model Filiais {
   id                      String      @id @map("_id") @default(auto()) @db.ObjectId
-  nomeDaFilial            String @unique
-  uf                      String?
+  nomeDaFilial            String      @unique
+  uf                      String
   status                  Boolean @default(true)
   feriados                Feriados[]
   staff                   Staff[]
@@ -123,19 +123,19 @@ model FiscalYears {
 }
 
 model Feriados {
-  id              String      @id @map("_id") @default(auto()) @db.ObjectId
+  id              String          @id @map("_id") @default(auto()) @db.ObjectId
   nomeDoFeriado   String
   dataDoFeriado   DateTime
   
-  tipoDeFeriado   TipoDeFeriado @relation(fields: [tipoDeFeriadoId], references: [id])
-  tipoDeFeriadoId String @db.ObjectId
+  tipoDeFeriado   TipoDeFeriado   @relation(fields: [tipoDeFeriadoId], references: [id])
+  tipoDeFeriadoId String          @db.ObjectId
   
-  filial          Filiais      @relation(fields: [filialId], references: [id])
-  filialId        String @db.ObjectId
+  filial          Filiais?        @relation(fields: [filialId], references: [id])
+  filialId        String?         @db.ObjectId
   
   comentarios     String
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
 }
 
 
