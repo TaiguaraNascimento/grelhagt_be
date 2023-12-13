@@ -227,16 +227,16 @@ model Staff {
 
 // CRUD DE PROJETOS
 
-model ClassePrimariaProjetos {
+model ClassesPrimariasProjetos {
   id                String      @id @map("_id") @default(auto()) @db.ObjectId
   classePrimaria    String
-  classeSecundaria  ClasseSecundariaProjetos[]
+  classeSecundaria  ClassesSecundariasProjetos[]
 }
 
-model ClasseSecundariaProjetos {
+model ClassesSecundariasProjetos {
   id                  String      @id @map("_id") @default(auto()) @db.ObjectId
   classeSecundaria    String
-  classePrimaria      ClassePrimariaProjetos @relation(fields: [classePrimariaId], references: [id])
+  classePrimaria      ClassesPrimariasProjetos @relation(fields: [classePrimariaId], references: [id])
   classePrimariaId    String @db.ObjectId
   classificacaoDeProjetos ClassificacaoDeProjetos[]
 
@@ -244,7 +244,7 @@ model ClasseSecundariaProjetos {
 
 model ClassificacaoDeProjetos {
   id                  String      @id @map("_id") @default(auto()) @db.ObjectId
-  classeSecundaria    ClasseSecundariaProjetos @relation(fields: [classeSecundariaId], references: [id])
+  classeSecundaria    ClassesSecundariasProjetos @relation(fields: [classeSecundariaId], references: [id])
   classeSecundariaId  String @db.ObjectId
   propostas           Propostas[]
 }

@@ -5,6 +5,9 @@ import { AppService } from './app.service';
 import { FeriadosModule } from './feriados/feriados.module';
 import { FiliaisModule } from './filiais/filiais.module';
 import { TipoDeFeriadoModule } from './tipodeferiado/tipodeferiado.module';
+import { UsuariosModule } from './usuarios/usuarios.module';
+import { CargosModule } from './cargos/cargos.module';
+import { ClassesSecundariasModule } from './classessecundarias/classessecundarias.module';
 
 @Module({
   imports: [
@@ -12,6 +15,9 @@ import { TipoDeFeriadoModule } from './tipodeferiado/tipodeferiado.module';
     FeriadosModule,
     FiliaisModule,
     TipoDeFeriadoModule,
+    UsuariosModule,
+    CargosModule,
+    ClassesSecundariasModule,
   ],
   controllers: [AppController],
   providers: [AppService],
