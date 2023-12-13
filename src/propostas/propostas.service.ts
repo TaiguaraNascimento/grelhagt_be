@@ -6,9 +6,13 @@ import { Prisma } from '@prisma/client';
 export class PropostasService {
   constructor(private readonly databaseService: DatabaseService) {}
 
-  cadastrarPropostas(propostas: Prisma.PropostasCreateInput) {
-    this.databaseService.propostas.create({
+  async cadastrarPropostas(propostas: Prisma.PropostasCreateInput) {
+    return this.databaseService.propostas.create({
       data: propostas,
     });
+  }
+
+  async listarPropostasCadastradas() {
+    return this.databaseService.propostas.findMany();
   }
 }

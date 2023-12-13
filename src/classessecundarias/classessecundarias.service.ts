@@ -6,11 +6,15 @@ import { Prisma } from '@prisma/client';
 export class ClassesSecundariasService {
   constructor(private readonly databaseService: DatabaseService) {}
 
-  cadastrarClasseSecundaria(
-    classeSecundaria: Prisma.ClasseSecundariaProjetosCreateInput,
+  async cadastrarClasseSecundaria(
+    classeSecundaria: Prisma.ClassesSecundariasProjetosCreateInput,
   ) {
-    this.databaseService.classeSecundariaProjetos.create({
+    return this.databaseService.classesSecundariasProjetos.create({
       data: classeSecundaria,
     });
+  }
+
+  async listagemClasseSecundaria() {
+    return this.databaseService.classesSecundariasProjetos.findMany();
   }
 }

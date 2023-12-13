@@ -1,5 +1,5 @@
 import { Controller } from '@nestjs/common';
-import { Get, Put, Delete, Body, Post } from '@nestjs/common';
+import { Get, Body, Post } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PropostasService } from './propostas.service';
 
@@ -9,6 +9,11 @@ export class PropostasController {
 
   @Post('nova')
   adicionarNovoCargo(@Body() proposta: Prisma.PropostasCreateInput) {
-    this.propostasService.cadastrarPropostas(proposta);
+    return this.propostasService.cadastrarPropostas(proposta);
+  }
+
+  @Get()
+  listarPropostasCadastradas() {
+    return this.propostasService.listarPropostasCadastradas();
   }
 }

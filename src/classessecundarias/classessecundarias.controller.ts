@@ -9,8 +9,13 @@ export class ClassesSecundariasController {
 
   @Post('nova')
   cadastarNovaClasse(
-    @Body() classe: Prisma.ClasseSecundariaProjetosCreateInput,
+    @Body() classe: Prisma.ClassesSecundariasProjetosCreateInput,
   ) {
     this.classeService.cadastrarClasseSecundaria(classe);
+  }
+
+  @Get()
+  listagemClasseSecundaria() {
+    return this.classeService.listagemClasseSecundaria();
   }
 }

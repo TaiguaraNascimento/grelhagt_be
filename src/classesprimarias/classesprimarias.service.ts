@@ -6,11 +6,19 @@ import { Prisma } from '@prisma/client';
 export class ClassesPrimariasService {
   constructor(private readonly databaseService: DatabaseService) {}
 
-  cadastrarClassePrimaria(
+  async cadastrarClassePrimaria(
     classePrimaria: Prisma.ClassesPrimariasProjetosCreateInput,
   ) {
-    this.databaseService.classesPrimariasProjetos.create({
+    return this.databaseService.classesPrimariasProjetos.create({
       data: classePrimaria,
+    });
+  }
+
+  async listarClassesPrimarias() {
+    return this.databaseService.classesPrimariasProjetos.findMany({
+      orderBy: {
+        classePrimaria: 'asc',
+      },
     });
   }
 }

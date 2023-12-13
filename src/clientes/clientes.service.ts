@@ -6,9 +6,17 @@ import { Prisma } from '@prisma/client';
 export class ClientesService {
   constructor(private readonly databaseService: DatabaseService) {}
 
-  cadastrarClientes(clientes: Prisma.ClientesCreateInput) {
-    this.databaseService.clientes.create({
+  async cadastrarClientes(clientes: Prisma.ClientesCreateInput) {
+    return this.databaseService.clientes.create({
       data: clientes,
+    });
+  }
+
+  async listagemDeClientes() {
+    return this.databaseService.clientes.findMany({
+      orderBy: {
+        nomeDoCliente: 'asc',
+      },
     });
   }
 }

@@ -7,7 +7,12 @@ export class FiliaisService {
   constructor(private readonly databaseService: DatabaseService) {}
 
   async listarFiliais() {
-    return this.databaseService.filiais.findMany();
+    return this.databaseService.filiais.findMany({
+      orderBy: {
+        nomeDaFilial: 'asc',
+        uf: 'asc',
+      },
+    });
   }
 
   async criarFilial(criarFilialDto: Prisma.FiliaisCreateInput) {

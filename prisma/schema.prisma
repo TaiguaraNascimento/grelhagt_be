@@ -51,16 +51,22 @@ model Divisoes {
 model Clientes {
   id                  String @id @map("_id") @default(auto()) @db.ObjectId
   nomeDoCliente       String
-  codigoClinte        String
-  razao_social        String
-  cnpj                String
-  grupo               String @db.ObjectId
+  codigoCliente       String?
+  razaoSocial         String?
+  empresaPrincipal    Boolean @default(false)
+  cnpj                String?
+  grupo               String? @db.ObjectId
   status              Boolean @default(true)
-  industria           Industrias @relation(fields: [industria_id], references: [id])
-  industria_id        String @db.ObjectId
-  fy_entrada          FiscalYears @relation(fields: [fy_entrada_id], references: [id])
-  fy_entrada_id       String @db.ObjectId
+  
+  industria           Industrias? @relation(fields: [industriaId], references: [id])
+  industriaId         String? @db.ObjectId
+  
+  fyEntrada           FiscalYears? @relation(fields: [fyEntradaId], references: [id])
+  fyEntradaId         String? @db.ObjectId
+  
   propostas           Propostas[]
+  
+  comentarios         String?
 }
 
 model OrigensDeProjetos {
@@ -71,29 +77,33 @@ model OrigensDeProjetos {
 
 
 model Propostas {
-  id                          String                    @id @map("_id") @default(auto()) @db.ObjectId
-  gtbProjeto                  String              
-  projetoInterno              Boolean                   @default(false)
+  id                          String                        @id @map("_id") @default(auto()) @db.ObjectId
+
+  fyEntrada                   FiscalYears?                  @relation(fields: [fyEntradaId], references: [id])
+  fyEntradaId                 String?                       @db.ObjectId
+
+  gtbProjeto                  String?              
+  projetoInterno              Boolean                       @default(false)
   
-  cliente                     Clientes                  @relation(fields: [clienteId], references: [id])
-  clienteId                   String                    @db.ObjectId
+  cliente                     Clientes?                     @relation(fields: [clienteId], references: [id])
+  clienteId                   String?                       @db.ObjectId
   
-  responsavel                 Profissionais             @relation(fields: [responsavelId], references: [id])
-  responsavelId               String                    @db.ObjectId
+  responsavel                 Profissionais?                @relation(fields: [responsavelId], references: [id])
+  responsavelId               String?                       @db.ObjectId
   
-  totalDeHoras                Int              
-  taxaMedia                   Float
-  valorTotal                  String              
+  totalDeHoras                Int                           @default(0)              
+  taxaMedia                   Float                         @default(0.0)
+  valorTotal                  Float                         @default(0.0)              
   
-  Classificacoes               ClassificacoesDeProjetos   @relation(fields: [ClassificacoesId], references: [id])
-  ClassificacoesId             String                    @db.ObjectId
+  classificacoes               ClassificacoesDeProjetos?    @relation(fields: [classificacoesId], references: [id])
+  classificacoesId             String?                      @db.ObjectId
   
-  origemDeProjetos            OrigensDeProjetos         @relation(fields: [origemDeProjetosId], references: [id])
-  origemDeProjetosId          String                    @db.ObjectId
+  origemDeProjetos            OrigensDeProjetos?            @relation(fields: [origemDeProjetosId], references: [id])
+  origemDeProjetosId          String?                       @db.ObjectId
   
-  trabalhoNovo                String
-  referencia                  String
-  comentarios                 String
+  trabalhoNovo                Boolean                       @default(true)
+  referencia                  DateTime?                
+  comentarios                 String?
 
   programacao                 Programacao[]
 }
@@ -115,11 +125,12 @@ model TipoDeFeriado {
 
 model FiscalYears {
   id                  String @id @map("_id") @default(auto()) @db.ObjectId
-  fiscalyear          String
-  data_inicial        DateTime
-  data_final          DateTime
-  
+  fiscalYear          String
+  dataInicial         DateTime
+  dataFinal           DateTime
+
   clientes            Clientes[]
+  propostas           Propostas[]
 }
 
 model Feriados {
@@ -183,7 +194,8 @@ model Programacao {
 model Cargos {
   id                String      @id @map("_id") @default(auto()) @db.ObjectId
   cargo             String
-  cargo_executivo   Boolean @default(false)
+  cargoExecutivo    Boolean @default(false)
+  graduacao         Int?
   staff             Staff[]
 }
 

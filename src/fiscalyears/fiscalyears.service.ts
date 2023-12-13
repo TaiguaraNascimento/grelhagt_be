@@ -6,9 +6,17 @@ import { Prisma } from '@prisma/client';
 export class FiscalYearsService {
   constructor(private readonly databaseService: DatabaseService) {}
 
-  cadastrarFiscalYear(fiscalYears: Prisma.FiscalYearsCreateInput) {
-    this.databaseService.fiscalYears.create({
-      data: fiscalYears,
+  async cadastrarFiscalYear(data: Prisma.FiscalYearsCreateInput) {
+    return this.databaseService.fiscalYears.create({
+      data: data,
+    });
+  }
+
+  async listarFiscalYears() {
+    return this.databaseService.fiscalYears.findMany({
+      orderBy: {
+        dataInicial: 'asc',
+      },
     });
   }
 }

@@ -1,5 +1,5 @@
 import { Controller } from '@nestjs/common';
-import { Put, Delete, Post, Get, Body } from '@nestjs/common';
+import { Post, Get, Body } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { ClassesPrimariasService } from './classesprimarias.service';
 
@@ -11,6 +11,11 @@ export class ClassesPrimariasController {
   cadastarNovaClasse(
     @Body() classe: Prisma.ClassesPrimariasProjetosCreateInput,
   ) {
-    this.classeService.cadastrarClassePrimaria(classe);
+    return this.classeService.cadastrarClassePrimaria(classe);
+  }
+
+  @Get()
+  listarClassesPrimarias() {
+    return this.classeService.listarClassesPrimarias();
   }
 }

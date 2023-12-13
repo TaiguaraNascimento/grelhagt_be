@@ -6,8 +6,25 @@ import { Prisma } from '@prisma/client';
 export class CargosService {
   constructor(private readonly databaseService: DatabaseService) {}
 
-  adicionarNovoCargo(cargo: Prisma.CargosCreateInput) {
-    this.databaseService.cargos.create({
+  async adicionarNovoCargo(cargo: Prisma.CargosCreateInput) {
+    return this.databaseService.cargos.create({
+      data: cargo,
+    });
+  }
+
+  async listarCargos() {
+    return this.databaseService.cargos.findMany({
+      orderBy: {
+        graduacao: 'desc',
+      },
+    });
+  }
+
+  async atualizarCargo(id: string, cargo: Prisma.CargosUpdateInput) {
+    return this.databaseService.cargos.update({
+      where: {
+        id,
+      },
       data: cargo,
     });
   }

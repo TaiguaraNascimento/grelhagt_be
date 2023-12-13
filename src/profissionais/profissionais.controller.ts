@@ -8,7 +8,9 @@ export class ProfissionaisController {
   constructor(private readonly profissionaisService: ProfissionaisService) {}
 
   @Post('novo')
-  adicionarNovoProfissional(@Body() profissional: Prisma.CargosCreateInput) {
+  adicionarNovoProfissional(
+    @Body() profissional: Prisma.ProfissionaisCreateInput,
+  ) {
     this.profissionaisService.cadastrarProfissionais(profissional);
   }
 }
