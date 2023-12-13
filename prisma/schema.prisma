@@ -126,14 +126,17 @@ model Feriados {
   id              String          @id @map("_id") @default(auto()) @db.ObjectId
   nomeDoFeriado   String
   dataDoFeriado   DateTime
+
+  calendarioFixo  Boolean         @default(false)
   
-  tipoDeFeriado   TipoDeFeriado   @relation(fields: [tipoDeFeriadoId], references: [id])
-  tipoDeFeriadoId String          @db.ObjectId
+  tipoDeFeriado   TipoDeFeriado?   @relation(fields: [tipoDeFeriadoId], references: [id])
+  tipoDeFeriadoId String?          @db.ObjectId
   
   filial          Filiais?        @relation(fields: [filialId], references: [id])
   filialId        String?         @db.ObjectId
   
-  comentarios     String
+  comentarios     String?
+
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
 }
