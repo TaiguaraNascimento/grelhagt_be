@@ -85,8 +85,8 @@ model Propostas {
   taxaMedia                   Float
   valorTotal                  String              
   
-  classificacao               ClassificacaoDeProjetos   @relation(fields: [classificacaoId], references: [id])
-  classificacaoId             String                    @db.ObjectId
+  Classificacoes               ClassificacoesDeProjetos   @relation(fields: [ClassificacoesId], references: [id])
+  ClassificacoesId             String                    @db.ObjectId
   
   origemDeProjetos            OrigensDeProjetos         @relation(fields: [origemDeProjetosId], references: [id])
   origemDeProjetosId          String                    @db.ObjectId
@@ -238,11 +238,11 @@ model ClassesSecundariasProjetos {
   classeSecundaria    String
   classePrimaria      ClassesPrimariasProjetos @relation(fields: [classePrimariaId], references: [id])
   classePrimariaId    String @db.ObjectId
-  classificacaoDeProjetos ClassificacaoDeProjetos[]
+  ClassificacoesDeProjetos ClassificacoesDeProjetos[]
 
 }
 
-model ClassificacaoDeProjetos {
+model ClassificacoesDeProjetos {
   id                  String      @id @map("_id") @default(auto()) @db.ObjectId
   classeSecundaria    ClassesSecundariasProjetos @relation(fields: [classeSecundariaId], references: [id])
   classeSecundariaId  String @db.ObjectId
