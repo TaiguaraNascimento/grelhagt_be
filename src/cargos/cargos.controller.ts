@@ -2,7 +2,6 @@ import { Controller, Param, Patch } from '@nestjs/common';
 import { Get, Body, Post } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { CargosService } from './cargos.service';
-import { Req, Res } from '@nestjs/common';
 
 @Controller('cargos')
 export class CargosController {

@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { FiliaisService } from './filiais.service';
 import { FiliaisController } from './filiais.controller';
-import { DatabaseModule } from 'src/database/database.modeule';
+import { DatabaseModule } from 'src/database/database.module';
 
 @Module({
   imports: [DatabaseModule],

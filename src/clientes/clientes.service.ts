@@ -19,4 +19,12 @@ export class ClientesService {
       },
     });
   }
+
+  async exibirCliente(id: string): Promise<any> {
+    return this.databaseService.clientes.findUnique({
+      where: {
+        id: id,
+      },
+    });
+  }
 }

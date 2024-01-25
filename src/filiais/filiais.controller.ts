@@ -4,10 +4,10 @@ import { Prisma } from '@prisma/client';
 
 @Controller('filiais')
 export class FiliaisController {
-  constructor(private filiaisService: FiliaisService) {}
+  constructor(private readonly filiaisService: FiliaisService) {}
 
   @Get()
-  listarFiliaisCadastradas() {
+  async listarFiliaisCadastradas() {
     return this.filiaisService.listarFiliais();
   }
 

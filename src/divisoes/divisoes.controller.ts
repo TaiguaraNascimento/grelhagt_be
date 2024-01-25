@@ -9,6 +9,11 @@ export class DivisoesController {
 
   @Post('novo')
   adicionarDivisao(@Body() divisao: Prisma.DivisoesCreateInput) {
-    this.divisoesService.cadastrarDivisao(divisao);
+    return this.divisoesService.cadastrarDivisao(divisao);
+  }
+
+  @Get()
+  listagemDeDivisoes() {
+    return this.divisoesService.listagemDivisoes();
   }
 }

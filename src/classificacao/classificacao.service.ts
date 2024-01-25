@@ -3,13 +3,11 @@ import { DatabaseService } from 'src/database/database.service';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
-export class ClassificacoesService {
+export class ClassificacaoService {
   constructor(private readonly databaseService: DatabaseService) {}
 
-  cadastrarClassificacao(
-    classificacao: Prisma.ClassificacoesDeProjetosCreateInput,
-  ) {
-    this.databaseService.classificacoesDeProjetos.create({
+  cadastrarClassificacao(classificacao: Prisma.ClassificacaoCreateInput) {
+    this.databaseService.classificacao.create({
       data: classificacao,
     });
   }

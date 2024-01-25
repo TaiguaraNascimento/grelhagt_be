@@ -1,14 +1,22 @@
 import { Injectable } from '@nestjs/common';
-import { DatabaseService } from 'src/database/database.service';
 import { Prisma } from '@prisma/client';
+import { DatabaseService } from 'src/database/database.service';
 
 @Injectable()
 export class DivisoesService {
   constructor(private readonly databaseService: DatabaseService) {}
 
-  cadastrarDivisao(divisao: Prisma.DivisoesCreateInput) {
-    this.databaseService.divisoes.create({
+  async cadastrarDivisao(divisao: Prisma.DivisoesCreateInput) {
+    return this.databaseService.divisoes.create({
       data: divisao,
+    });
+  }
+
+  async listagemDivisoes() {
+    return this.databaseService.divisoes.findMany({
+      orderBy: {
+        divisoes: 'asc',
+      },
     });
   }
 }

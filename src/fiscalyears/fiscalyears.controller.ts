@@ -1,8 +1,9 @@
 import { Controller } from '@nestjs/common';
-import { Get, Body, Post } from '@nestjs/common';
+import { Get, Body, Post, Patch, Param } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { FiscalYearsService } from './fiscalyears.service';
 import Utilidades from 'backend/utils/Utilidades';
+import { UpdateFiscalYearsDto } from './fiscalyears.dto';
 
 @Controller('fiscalyears')
 export class FiscalYearsController {
@@ -25,5 +26,13 @@ export class FiscalYearsController {
   @Get()
   listarFiscalYears() {
     return this.fiscalyearsService.listarFiscalYears();
+  }
+
+  @Patch('atualizar/:id')
+  atualizarFiscalYear(
+    @Param('id') id,
+    @Body() fiscalYear: UpdateFiscalYearsDto,
+  ) {
+    return this.fiscalyearsService.atualizarFiscalYear(id, fiscalYear);
   }
 }

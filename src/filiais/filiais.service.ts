@@ -10,7 +10,6 @@ export class FiliaisService {
     return this.databaseService.filiais.findMany({
       orderBy: {
         nomeDaFilial: 'asc',
-        uf: 'asc',
       },
     });
   }

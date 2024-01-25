@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { FiscalYearsService } from './fiscalyears.service';
 import { FiscalYearsController } from './fiscalyears.controller';
-import { DatabaseModule } from 'src/database/database.modeule';
+import { DatabaseModule } from 'src/database/database.module';
 
 @Module({
   providers: [FiscalYearsService],

@@ -52,7 +52,7 @@ export class FeriadoService {
     filial: string,
     tipo: string,
   ) {
-    let whereClause: Prisma.FeriadosWhereInput = {};
+    const whereClause: Prisma.FeriadosWhereInput = {};
 
     whereClause.dataDoFeriado = {
       ...(Utilidades.verificarDataValida(dataInicial)

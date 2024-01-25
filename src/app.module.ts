@@ -7,9 +7,8 @@ import { FiliaisModule } from './filiais/filiais.module';
 import { TipoDeFeriadoModule } from './tipodeferiado/tipodeferiado.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { CargosModule } from './cargos/cargos.module';
-import { ClassesSecundariasModule } from './classessecundarias/classessecundarias.module';
-import { ClassesPrimariasModule } from './classesprimarias/classesprimarias.module';
-import { ClassificacoesModule } from './classificacoes/classificacoes.module';
+import { NaturezaModule } from './natureza/natureza.module';
+import { ClassificacaoModule } from './classificacao/classificacao.module';
 import { ClientesModule } from './clientes/clientes.module';
 import { DivisoesModule } from './divisoes/divisoes.module';
 import { EventosPadraoModule } from './eventospadrao/eventospadrao.module';
@@ -25,9 +24,8 @@ import { StaffModule } from './staff/staff.module';
   imports: [
     ConfigModule.forRoot(),
     CargosModule,
-    ClassesPrimariasModule,
-    ClassesSecundariasModule,
-    ClassificacoesModule,
+    NaturezaModule,
+    ClassificacaoModule,
     ClientesModule,
     DivisoesModule,
     EventosPadraoModule,

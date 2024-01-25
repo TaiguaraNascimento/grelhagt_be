@@ -23,7 +23,7 @@ export class CargosService {
   async atualizarCargo(id: string, cargo: Prisma.CargosUpdateInput) {
     return this.databaseService.cargos.update({
       where: {
-        id,
+        id: id,
       },
       data: cargo,
     });

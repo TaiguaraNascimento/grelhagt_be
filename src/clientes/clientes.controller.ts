@@ -1,4 +1,4 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Param } from '@nestjs/common';
 import { Get, Body, Post } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { ClientesService } from './clientes.service';
@@ -15,5 +15,10 @@ export class ClientesController {
   @Get()
   listagemDeClientes() {
     return this.clientesService.listagemDeClientes();
+  }
+
+  @Get(':id')
+  async exibirCliente(@Param('id') id: string) {
+    return this.clientesService.exibirCliente(id);
   }
 }
