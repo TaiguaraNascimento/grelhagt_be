@@ -3,14 +3,14 @@ import { IsEmail, IsString, IsDate } from 'class-validator';
 
 export class CreateProfissionaisDTO {
   @IsString()
-  nomeDoProfissional?: string;
+  nomeDoProfissional: string;
 
   @Type(() => Date)
   @IsDate()
-  dataDeNascimento?: Date;
+  dataDeNascimento: Date;
 
   @IsEmail()
-  email?: string;
+  email: string;
 
   @Type(() => Date)
   @IsDate()
@@ -18,8 +18,8 @@ export class CreateProfissionaisDTO {
 
   @Type(() => Date)
   @IsDate()
-  dataDeDesligamento?: Date;
+  dataDeDesligamento: Date;
 
   @IsString()
-  comentarios?: Date;
+  comentarios: string;
 }

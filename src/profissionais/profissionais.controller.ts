@@ -1,4 +1,4 @@
-import { Controller, Patch } from '@nestjs/common';
+import { Controller, Param, Patch } from '@nestjs/common';
 import { Get, Body, Post } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { ProfissionaisService } from './profissionais.service';
@@ -38,6 +38,6 @@ export class ProfissionaisController {
     @Param('id') id,
     @Body() profissionais: UpdateProfissionaisDTO,
   ) {
-    return 'ok';
+    return this.profissionaisService.atualizarProfissionais(id, profissionais);
   }
 }
