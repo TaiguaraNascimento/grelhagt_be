@@ -28,6 +28,16 @@ export class FiscalYearsService {
       orderBy: {
         dataInicial: 'asc',
       },
+      select: {
+        id: true,
+        fiscalYear: true,
+        dataInicial: true,
+        dataFinal: true,
+        comentarios: true,
+        status: true,
+        createdAt: true,
+        updatedAt: true,
+      },
     });
   }
 }

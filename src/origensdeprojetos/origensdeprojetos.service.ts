@@ -9,8 +9,16 @@ export class OrigensDeProjetosService {
   cadastrarOrigemDeProjeto(
     origensDeProjetos: Prisma.OrigensDeProjetosCreateInput,
   ) {
-    this.databaseService.origensDeProjetos.create({
+    return this.databaseService.origensDeProjetos.create({
       data: origensDeProjetos,
+    });
+  }
+
+  listagemDeOrigensdeProjetos() {
+    return this.databaseService.origensDeProjetos.findMany({
+      orderBy: {
+        origemDeProjetos: 'asc',
+      },
     });
   }
 }

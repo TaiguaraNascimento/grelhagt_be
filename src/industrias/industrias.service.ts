@@ -7,8 +7,16 @@ export class IndustriasService {
   constructor(private readonly databaseService: DatabaseService) {}
 
   cadastrarIndustrias(industrias: Prisma.IndustriasCreateInput) {
-    this.databaseService.industrias.create({
+    return this.databaseService.industrias.create({
       data: industrias,
+    });
+  }
+
+  listarIndustrias() {
+    return this.databaseService.industrias.findMany({
+      orderBy: {
+        industrias: 'asc',
+      },
     });
   }
 }

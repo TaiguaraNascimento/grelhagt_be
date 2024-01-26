@@ -19,6 +19,7 @@ import { ProfissionaisModule } from './profissionais/profissionais.module';
 import { ProgramacaoModule } from './programacao/programacao.module';
 import { PropostasModule } from './propostas/propostas.module';
 import { StaffModule } from './staff/staff.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { StaffModule } from './staff/staff.module';
     StaffModule,
     TipoDeFeriadoModule,
     UsuariosModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

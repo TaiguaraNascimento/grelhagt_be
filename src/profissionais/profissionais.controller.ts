@@ -1,7 +1,9 @@
-import { Controller } from '@nestjs/common';
-import { Get, Put, Delete, Body, Post } from '@nestjs/common';
+import { Controller, Patch } from '@nestjs/common';
+import { Get, Body, Post } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { ProfissionaisService } from './profissionais.service';
+import Utilidades from 'backend/utils/Utilidades';
+import { UpdateProfissionaisDTO } from './dto/update-profissionais.dto';
 
 @Controller('profissionais')
 export class ProfissionaisController {
@@ -11,6 +13,31 @@ export class ProfissionaisController {
   adicionarNovoProfissional(
     @Body() profissional: Prisma.ProfissionaisCreateInput,
   ) {
-    this.profissionaisService.cadastrarProfissionais(profissional);
+    if (profissional.dataDeEntrada.toString() != null) {
+      profissional.dataDeEntrada = Utilidades.DateFromString(
+        profissional.dataDeEntrada.toString(),
+      );
+    }
+
+    if (profissional.dataDeNascimento.toString() != null) {
+      profissional.dataDeNascimento = Utilidades.DateFromString(
+        profissional.dataDeNascimento.toString(),
+      );
+    }
+
+    return this.profissionaisService.cadastrarProfissionais(profissional);
+  }
+
+  @Get()
+  listagemDeProfissionais() {
+    return this.profissionaisService.listagemDeProfissionais();
+  }
+
+  @Patch('atualizar/:id')
+  atualizarProfissionais(
+    @Param('id') id,
+    @Body() profissionais: UpdateProfissionaisDTO,
+  ) {
+    return 'ok';
   }
 }

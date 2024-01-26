@@ -9,6 +9,11 @@ export class IndustriasController {
 
   @Post('nova')
   adicionarIndustria(@Body() industria: Prisma.IndustriasCreateInput) {
-    this.industriasService.cadastrarIndustrias(industria);
+    return this.industriasService.cadastrarIndustrias(industria);
+  }
+
+  @Get()
+  listarIndustrias() {
+    return this.industriasService.listarIndustrias();
   }
 }

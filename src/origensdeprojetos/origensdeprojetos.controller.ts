@@ -1,5 +1,5 @@
 import { Controller } from '@nestjs/common';
-import { Get, Put, Delete, Body, Post } from '@nestjs/common';
+import { Get, Body, Post } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { OrigensDeProjetosService } from './origensdeprojetos.service';
 
@@ -9,8 +9,13 @@ export class OrigensDeProjetosController {
     private readonly origensDeProjetosService: OrigensDeProjetosService,
   ) {}
 
-  @Post('novo')
+  @Post('nova')
   adicionarOrigemDeProjeto(@Body() cargo: Prisma.OrigensDeProjetosCreateInput) {
-    this.origensDeProjetosService.cadastrarOrigemDeProjeto(cargo);
+    return this.origensDeProjetosService.cadastrarOrigemDeProjeto(cargo);
+  }
+
+  @Get()
+  listagemDeOrigensdeProjetos() {
+    return this.origensDeProjetosService.listagemDeOrigensdeProjetos();
   }
 }

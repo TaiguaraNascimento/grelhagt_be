@@ -1,5 +1,5 @@
 import { Controller } from '@nestjs/common';
-import { Get, Put, Delete, Body, Post } from '@nestjs/common';
+import { Get, Body, Post } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { EventosPadraoService } from './eventospadrao.service';
 
@@ -11,6 +11,11 @@ export class EventosPadraoController {
   adicionarNovoCargo(
     @Body() eventoPadrao: Prisma.TipoDeEventosPadraoCreateInput,
   ) {
-    this.eventosPadraoService.cadastrarTipoDeEventoPadrao(eventoPadrao);
+    return this.eventosPadraoService.cadastrarTipoDeEventoPadrao(eventoPadrao);
+  }
+
+  @Get()
+  listarEventosPadrao() {
+    return this.eventosPadraoService.listarEventosPadrao();
   }
 }

@@ -9,8 +9,16 @@ export class EventosPadraoService {
   cadastrarTipoDeEventoPadrao(
     tipoDeEventoPadrao: Prisma.TipoDeEventosPadraoCreateInput,
   ) {
-    this.databaseService.tipoDeEventosPadrao.create({
+    return this.databaseService.tipoDeEventosPadrao.create({
       data: tipoDeEventoPadrao,
+    });
+  }
+
+  listarEventosPadrao() {
+    return this.databaseService.tipoDeEventosPadrao.findMany({
+      orderBy: {
+        tipoDeEvento: 'asc',
+      },
     });
   }
 }

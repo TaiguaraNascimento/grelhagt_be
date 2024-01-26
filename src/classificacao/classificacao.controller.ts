@@ -1,16 +1,21 @@
 import { Controller } from '@nestjs/common';
-import { Body, Post } from '@nestjs/common';
+import { Body, Post, Get } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { ClassificacaoService } from './classificacao.service';
 
-@Controller('classificacoes')
+@Controller('classificacao')
 export class ClassificacaoController {
-  constructor(private readonly classificacoesService: ClassificacaoService) {}
+  constructor(private readonly classificacaoService: ClassificacaoService) {}
 
-  @Post('novo')
+  @Post('nova')
   adicionarClassificacao(
     @Body() classificacao: Prisma.ClassificacaoCreateInput,
   ) {
-    this.classificacoesService.cadastrarClassificacao(classificacao);
+    return this.classificacaoService.cadastrarClassificacao(classificacao);
+  }
+
+  @Get()
+  listarClassificacoes() {
+    return this.classificacaoService.listarClassificacoes();
   }
 }
