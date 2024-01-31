@@ -4,8 +4,8 @@ import { ProfissionaisController } from './profissionais.controller';
 import { DatabaseModule } from 'src/database/database.module';
 
 @Module({
-  providers: [ProfissionaisService],
-  controllers: [ProfissionaisController],
   imports: [DatabaseModule],
+  controllers: [ProfissionaisController],
+  providers: [ProfissionaisService],
 })
 export class ProfissionaisModule {}

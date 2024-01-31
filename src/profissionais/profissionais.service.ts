@@ -1,6 +1,6 @@
+import { ProfissionaisRepository } from './repository/profissionais.repository';
 import { Injectable } from '@nestjs/common';
 import { UpdateProfissionaisDTO } from './dto/update-profissionais.dto';
-import { ProfissionaisRepository } from './repository/profissionais.repository';
 import { CreateProfissionaisDTO } from './dto/create-profissionais.dto';
 
 @Injectable()

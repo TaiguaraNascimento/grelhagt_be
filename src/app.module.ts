@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { ConfigModule } from '@nestjs/config';
 import { AppService } from './app.service';
+import { ConfigModule } from '@nestjs/config';
 import { FeriadosModule } from './feriados/feriados.module';
 import { FiliaisModule } from './filiais/filiais.module';
 import { TipoDeFeriadoModule } from './tipodeferiado/tipodeferiado.module';
@@ -15,11 +15,11 @@ import { EventosPadraoModule } from './eventospadrao/eventospadrao.module';
 import { FiscalYearsModule } from './fiscalyears/fiscalyears.module';
 import { IndustriasModule } from './industrias/industrias.module';
 import { OrigensDeProjetosModule } from './origensdeprojetos/origensdeprojetos.module';
-import { ProfissionaisModule } from './profissionais/profissionais.module';
 import { ProgramacaoModule } from './programacao/programacao.module';
 import { PropostasModule } from './propostas/propostas.module';
 import { StaffModule } from './staff/staff.module';
 import { UsersModule } from './users/users.module';
+import { ProfissionaisModule } from './profissionais/profissionais.module';
 
 @Module({
   imports: [
@@ -35,13 +35,13 @@ import { UsersModule } from './users/users.module';
     FiscalYearsModule,
     IndustriasModule,
     OrigensDeProjetosModule,
-    ProfissionaisModule,
     ProgramacaoModule,
     PropostasModule,
     StaffModule,
     TipoDeFeriadoModule,
     UsuariosModule,
     UsersModule,
+    ProfissionaisModule,
   ],
   controllers: [AppController],
   providers: [AppService],

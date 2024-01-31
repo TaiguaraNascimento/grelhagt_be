@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
-import { CreateProfissionaisDTO } from '../dto/create-profissionais.dto';
 import { ProfissionaisEntity } from '../entity/profissionais.entity';
+import { CreateProfissionaisDTO } from '../dto/create-profissionais.dto';
 import { UpdateProfissionaisDTO } from '../dto/update-profissionais.dto';
 
 @Injectable()

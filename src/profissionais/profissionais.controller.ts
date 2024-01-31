@@ -1,9 +1,8 @@
-import { Controller, Param, Patch } from '@nestjs/common';
-import { Get, Body, Post } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { Get, Body, Post, Controller, Param, Patch } from '@nestjs/common';
 import { ProfissionaisService } from './profissionais.service';
 import Utilidades from 'backend/utils/Utilidades';
 import { UpdateProfissionaisDTO } from './dto/update-profissionais.dto';
+import { CreateProfissionaisDTO } from './dto/create-profissionais.dto';
 
 @Controller('profissionais')
 export class ProfissionaisController {
@@ -11,21 +10,23 @@ export class ProfissionaisController {
 
   @Post('novo')
   adicionarNovoProfissional(
-    @Body() profissional: Prisma.ProfissionaisCreateInput,
+    @Body() createProfissionalDTO: CreateProfissionaisDTO,
   ) {
-    if (profissional.dataDeEntrada.toString() != null) {
-      profissional.dataDeEntrada = Utilidades.DateFromString(
-        profissional.dataDeEntrada.toString(),
+    if (createProfissionalDTO.dataDeEntrada.toString() != null) {
+      createProfissionalDTO.dataDeEntrada = Utilidades.DateFromString(
+        createProfissionalDTO.dataDeEntrada.toString(),
       );
     }
 
-    if (profissional.dataDeNascimento.toString() != null) {
-      profissional.dataDeNascimento = Utilidades.DateFromString(
-        profissional.dataDeNascimento.toString(),
+    if (createProfissionalDTO.dataDeNascimento.toString() != null) {
+      createProfissionalDTO.dataDeNascimento = Utilidades.DateFromString(
+        createProfissionalDTO.dataDeNascimento.toString(),
       );
     }
 
-    return this.profissionaisService.cadastrarProfissionais(profissional);
+    return this.profissionaisService.cadastrarProfissionais(
+      createProfissionalDTO,
+    );
   }
 
   @Get()
